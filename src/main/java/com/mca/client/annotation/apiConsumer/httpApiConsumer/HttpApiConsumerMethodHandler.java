@@ -3,16 +3,22 @@ package com.mca.client.annotation.apiConsumer.httpApiConsumer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mca.client.annotation.mcaClient.McaClient;
 import com.mca.client.openapi.OpenApiSpecsContext;
-import com.mca.client.utils.ClassUtils;
 import com.mca.openApi.OpenApiClient;
 import io.swagger.oas.models.OpenAPI;
 import io.swagger.oas.models.PathItem;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.AuthorizedClientServiceOAuth2AuthorizedClientManager;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryReactiveClientRegistrationRepository;
+import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.thepavel.icomponent.handler.MethodHandler;
 import org.thepavel.icomponent.metadata.MethodMetadata;
 import org.thepavel.icomponent.metadata.ParameterMetadata;
@@ -34,18 +40,30 @@ public class HttpApiConsumerMethodHandler implements MethodHandler {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private WebClient oAuth2webClient;
+
+    @Autowired
+    private InMemoryReactiveClientRegistrationRepository clientRegistrationRepository;
+
     @Override
     public Object handle(Object[] arguments, MethodMetadata methodMetadata) {
         log.info("HttpApiConsumerMethodHandler");
         Map<String, Object> mcaClientParams = methodMetadata.getSourceClassMetadata().getAnnotationAttributes(McaClient.class.getCanonicalName());
         Map<String, Object> apiConsumerParams = methodMetadata.getAnnotationAttributes(HttpApiConsumer.class.getCanonicalName());
 
-        Object requestBody = this.getRequestBody(arguments, methodMetadata);
-        Map<String, Object> pathVariables = this.getPathVariables(arguments, methodMetadata);
-        Map<String, Object> requestParamsVariables = this.getRequestParamsVariables(arguments, methodMetadata);
+        Object requestBody = this.retrieveRequestBody(arguments, methodMetadata);
+        Map<String, Object> pathVariables = this.retrievePathVariables(arguments, methodMetadata);
+        Map<String, Object> requestParamsVariables = this.retrieveRequestParamsVariables(arguments, methodMetadata);
 
         OpenAPI openAPISpec = this.openApiSpecsContext.getSpec(mcaClientParams.get("serviceName").toString());
-        OpenApiClient openApiClient = new OpenApiClient(openAPISpec);
+        WebClient webClient = null;
+        if (this.clientRegistrationRepository.findByRegistrationId(mcaClientParams.get("serviceName").toString()).blockOptional().isPresent()) {
+            webClient = oAuth2webClient;
+        } else {
+            webClient = WebClient.builder().build();
+        }
+        OpenApiClient openApiClient = new OpenApiClient(webClient, mcaClientParams.get("serviceName").toString(), openAPISpec);
         PathItem.HttpMethod httpMethod = PathItem.HttpMethod.valueOf(apiConsumerParams.get("method").toString());
         Object apiCallResult = openApiClient.call(httpMethod, apiConsumerParams.get("path").toString(), requestParamsVariables, pathVariables, requestBody);
 
@@ -57,7 +75,7 @@ public class HttpApiConsumerMethodHandler implements MethodHandler {
         return apiCallResult;
     }
 
-    private Map<String, Object> getPathVariables(Object[] arguments, MethodMetadata methodMetadata) {
+    private Map<String, Object> retrievePathVariables(Object[] arguments, MethodMetadata methodMetadata) {
         List<ParameterMetadata> pathVariableParametersMetadata = methodMetadata.getParametersMetadata()
                 .stream()
                 .filter(parameterMetadata -> parameterMetadata.isAnnotated(PathVariable.class.getCanonicalName()))
@@ -73,7 +91,7 @@ public class HttpApiConsumerMethodHandler implements MethodHandler {
         return pathVariables;
     }
 
-    private Map<String, Object> getRequestParamsVariables(Object[] arguments, MethodMetadata methodMetadata) {
+    private Map<String, Object> retrieveRequestParamsVariables(Object[] arguments, MethodMetadata methodMetadata) {
         List<ParameterMetadata> requestParamsParametersMetadata = methodMetadata.getParametersMetadata()
                 .stream()
                 .filter(parameterMetadata -> parameterMetadata.isAnnotated(RequestParam.class.getCanonicalName()))
@@ -89,7 +107,7 @@ public class HttpApiConsumerMethodHandler implements MethodHandler {
         return requestParamVariables;
     }
 
-    private Object getRequestBody(Object[] arguments, MethodMetadata methodMetadata) {
+    private Object retrieveRequestBody(Object[] arguments, MethodMetadata methodMetadata) {
         Optional<ParameterMetadata> requestBodyParameterMetadata = methodMetadata.getParametersMetadata()
                 .stream()
                 .filter(parameterMetadata -> parameterMetadata.isAnnotated(RequestBody.class.getCanonicalName()))
