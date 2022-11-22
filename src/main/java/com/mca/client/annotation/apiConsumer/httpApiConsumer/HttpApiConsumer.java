@@ -19,6 +19,5 @@ import java.lang.annotation.Target;
 public @interface HttpApiConsumer {
 
     String path();
-
     PathItem.HttpMethod method();
 }

@@ -1,4 +1,4 @@
-package com.mca.client.annotation;
+package com.mca.client.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,6 +11,5 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "mca")
 public class McaClientProperties {
 
-    private Map<String, String> providers;
-
+    private Map<String, ProviderProperties> providers;
 }
