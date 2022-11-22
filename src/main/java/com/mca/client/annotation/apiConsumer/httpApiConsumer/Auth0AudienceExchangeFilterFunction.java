@@ -10,15 +10,22 @@ import reactor.core.publisher.Mono;
 
 public class Auth0AudienceExchangeFilterFunction implements ExchangeFilterFunction {
 
-    private static final String CLIENT_REGISTRATION_ID_ATTR_NAME = OAuth2AuthorizedClient.class.getName()
-            .concat(".CLIENT_REGISTRATION_ID");
+    public static final String CLIENT_REGISTRATION_ID_ATTR_NAME = "REGISTRATION_ID";
+
+    private McaOAuth2ClientProperties oAuth2ClientProperties;
+
+    public Auth0AudienceExchangeFilterFunction(McaOAuth2ClientProperties oAuth2ClientProperties) {
+        this.oAuth2ClientProperties = oAuth2ClientProperties;
+    }
 
     @Override
     public Mono<ClientResponse> filter(ClientRequest clientRequest, ExchangeFunction exchangeFunction) {
-        String clientId = (String) clientRequest.attributes().get(CLIENT_REGISTRATION_ID_ATTR_NAME);
+        // temporary workaround
+        String registrationId = clientRequest.headers().get(CLIENT_REGISTRATION_ID_ATTR_NAME).get(0);
+        String audience = this.oAuth2ClientProperties.getRegistration().get(registrationId).getAudience();
 
         clientRequest = ClientRequest.from(clientRequest)
-                .body(((BodyInserters.FormInserter)clientRequest.body()).with("audience","http://localhost:5051/"))
+                .body(((BodyInserters.FormInserter) clientRequest.body()).with("audience", audience))
                 .build();
         return exchangeFunction.exchange(clientRequest);
     }
