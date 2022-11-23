@@ -1,4 +1,4 @@
-package com.mca.client.annotation.apiConsumer.httpApiConsumer;
+package com.mca.client.annotation.api.consumer.http.oauth;
 
 import lombok.Data;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;

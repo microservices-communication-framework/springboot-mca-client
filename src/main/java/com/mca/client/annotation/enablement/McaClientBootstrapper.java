@@ -1,7 +1,7 @@
-package com.mca.client;
+package com.mca.client.annotation.enablement;
 
-import com.mca.client.properties.McaClientProperties;
-import com.mca.client.properties.ProviderProperties;
+import com.mca.client.config.properties.McaClientProperties;
+import com.mca.client.config.properties.ProviderProperties;
 import com.mca.openApi.OpenApiLoader;
 import com.mca.client.openapi.OpenApiSpecsContext;
 import io.swagger.oas.models.OpenAPI;
@@ -17,15 +17,15 @@ public class McaClientBootstrapper {
     private McaClientProperties mcaClientProperties;
 
     @Autowired
-    private OpenApiLoader openAPILoader;
+    private OpenApiLoader openApiLoader;
 
     @Autowired
-    private OpenApiSpecsContext openAPISpecsContext;
+    private OpenApiSpecsContext openApiSpecsContext;
 
     public void bootstrap() {
         for (Map.Entry<String, ProviderProperties> entry : this.mcaClientProperties.getProviders().entrySet()) {
-            OpenAPI spec = this.openAPILoader.loadSpecFile(entry.getValue().getUrl());
-            this.openAPISpecsContext.addSpec(entry.getKey(), spec);
+            OpenAPI spec = this.openApiLoader.loadSpecFile(entry.getValue().getUrl());
+            this.openApiSpecsContext.addSpec(entry.getKey(), spec);
         }
     }
 

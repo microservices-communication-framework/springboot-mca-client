@@ -1,6 +1,5 @@
-package com.mca.client.annotation.apiConsumer.httpApiConsumer;
+package com.mca.client.annotation.api.consumer.http.oauth;
 
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.ClientResponse;

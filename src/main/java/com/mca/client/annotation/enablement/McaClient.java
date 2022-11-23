@@ -1,4 +1,4 @@
-package com.mca.client.annotation.mcaClient;
+package com.mca.client.annotation.enablement;
 
 
 import org.springframework.stereotype.Service;
@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
 @Service
 public @interface McaClient {
 
-    String serviceName();
+    String providerName();
 }
