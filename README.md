@@ -1,8 +1,8 @@
 # About
 
 `springboot-mca-client` is a simple lightweight springboot http clients configurer. This library aims to facilitate the management of APIs consumptions.<br/>
-This project in on it's very early stage, all kinds of contibutions/feedbacks are welcome.
-
+This project in on it's very early stage, all kinds of contibutions/feedbacks are welcome.<br/><br/>
+[![Java CI with Maven](https://github.com/microservices-communication-framework/springboot-mca-client/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/microservices-communication-framework/springboot-mca-client/actions/workflows/maven.yml)
 
 
 ## Installation
