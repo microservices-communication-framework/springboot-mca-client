@@ -1,6 +1,6 @@
 # About
 
-`springboot-mca-client` is a simple springboot http clients configurer. This library aims to facilitate the management of APIs consumptions at runtime.<br/>
+`springboot-mca-client` is a simple lightweight springboot http clients configurer. This library aims to facilitate the management of APIs consumptions.<br/>
 Samples are available [here](https://github.com/microservices-communication-framework/samples)
 
 ## Installation
