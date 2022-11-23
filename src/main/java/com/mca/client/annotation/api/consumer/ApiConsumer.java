@@ -1,4 +1,4 @@
-package com.mca.client.annotation.apiConsumer;
+package com.mca.client.annotation.api.consumer;
 
 
 import java.lang.annotation.ElementType;

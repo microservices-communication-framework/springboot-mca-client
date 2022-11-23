@@ -1,6 +1,5 @@
-package com.mca.client.annotation.enableMCAClient;
+package com.mca.client.annotation.enablement;
 
-import com.mca.client.McaClientBootstrapper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;

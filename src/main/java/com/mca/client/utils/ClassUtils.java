@@ -9,8 +9,7 @@ public class ClassUtils {
         return ClassUtils.getWrapperTypes().contains(clazz);
     }
 
-    public static Set<Class<?>> getWrapperTypes()
-    {
+    public static Set<Class<?>> getWrapperTypes() {
         Set<Class<?>> ret = new HashSet<>();
         ret.add(Boolean.class);
         ret.add(Character.class);

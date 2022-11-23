@@ -1,4 +1,4 @@
-package com.mca.client.properties;
+package com.mca.client.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
