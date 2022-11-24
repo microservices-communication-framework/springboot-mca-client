@@ -38,7 +38,7 @@ public class ConsumerApp {
 Create Http client using `@McaClient` and `@HttpApiConsumer` annotations
 
 ```java
-@McaClient(serviceName = "simple-api-provider")
+@McaClient(providerName = "simple-api-provider")
 public interface SimpleProviderAPIClient {
 
     @HttpApiConsumer(method = PathItem.HttpMethod.GET, path = "/api/v1/string/lowercase/{value}")
