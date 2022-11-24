@@ -3,13 +3,36 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-
     <artifactId>springboot-mca-client</artifactId>
     <groupId>io.github.ahmedriahi</groupId>
     <version>0.0.1</version>
+    <packaging>jar</packaging>
+
+    <name>springboot-mca-client</name>
+    <description>API client library</description>
+    <url>https://github.com/microservices-communication-framework/springboot-mca-client</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Ahmed Riahi</name>
+            <email>contact@ahmedriahi.net</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/microservices-communication-framework/springboot-mca-client.git
+        </connection>
+        <developerConnection>scm:git:ssh://github.com:microservices-communication-framework/springboot-mca-client.git
+        </developerConnection>
+        <url>http://github.com/microservices-communication-framework/springboot-mca-client/tree/main</url>
+    </scm>
 
     <modelVersion>4.0.0</modelVersion>
-
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -177,6 +200,27 @@
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <gpgArguments>
+                        <arg>--pinentry-mode</arg>
+                        <arg>loopback</arg>
+                    </gpgArguments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
