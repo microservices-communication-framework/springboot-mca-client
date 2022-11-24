@@ -2,8 +2,8 @@ package com.mca.client.annotation.enablement;
 
 import com.mca.client.config.properties.McaClientProperties;
 import com.mca.client.config.properties.ProviderProperties;
-import com.mca.openApi.OpenApiLoader;
 import com.mca.client.openapi.OpenApiSpecsContext;
+import com.mca.openapi.OpenApiLoader;
 import io.swagger.oas.models.OpenAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

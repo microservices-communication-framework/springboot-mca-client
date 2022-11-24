@@ -3,7 +3,7 @@ package com.mca.client.annotation.api.consumer.http;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mca.client.annotation.enablement.McaClient;
 import com.mca.client.openapi.OpenApiSpecsContext;
-import com.mca.openApi.OpenApiClient;
+import com.mca.openapi.OpenApiClient;
 import io.swagger.oas.models.OpenAPI;
 import io.swagger.oas.models.PathItem;
 import lombok.extern.slf4j.Slf4j;

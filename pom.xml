@@ -5,11 +5,11 @@
 
     <artifactId>springboot-mca-client</artifactId>
     <groupId>io.github.ahmedriahi</groupId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
 
     <name>springboot-mca-client</name>
-    <description>API client library</description>
+    <description>API client lightweight framework</description>
     <url>https://github.com/microservices-communication-framework/springboot-mca-client</url>
     <licenses>
         <license>
@@ -90,7 +90,7 @@
         <dependency>
             <groupId>io.github.ahmedriahi</groupId>
             <artifactId>open-api-client</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.3</version>
         </dependency>
 
 
