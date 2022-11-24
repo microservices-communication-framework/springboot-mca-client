@@ -5,7 +5,7 @@
 
     <artifactId>springboot-mca-client</artifactId>
     <groupId>io.github.ahmedriahi</groupId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
 
     <name>springboot-mca-client</name>
