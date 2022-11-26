@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.thepavel.icomponent.InterfaceComponentScan;
 
 @EnableMcaClient
+@InterfaceComponentScan
 @SpringBootApplication
 public class SimpleApp {
 
