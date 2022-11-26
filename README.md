@@ -15,7 +15,7 @@ The API consumer service should include the following dependency:
 <dependency>
     <groupId>io.github.ahmedriahi</groupId>
     <artifactId>springboot-mca-client</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
@@ -24,9 +24,9 @@ The API consumer service should include the following dependency:
 Add both `@EnableMcaClient` and `@InterfaceComponentScan` to your main springboot application class
 
 ```java
-@SpringBootApplication
 @EnableMcaClient
 @InterfaceComponentScan
+@SpringBootApplication
 public class ConsumerApp {
     public static void main(String[] args) {
         SpringApplication.run(ConsumerApp.class, args);
