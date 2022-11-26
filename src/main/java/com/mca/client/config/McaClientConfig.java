@@ -9,4 +9,5 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("com.mca.openapi")
 @EnableConfigurationProperties(McaOAuth2ClientProperties.class)
 public class McaClientConfig {
+
 }

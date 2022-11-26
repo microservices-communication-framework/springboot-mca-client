@@ -3,5 +3,6 @@
 mca:
   providers:
     fake-server:
-      url: http://localhost:8080/v3/api-docs
-
+      url: http://localhost:${server.port}/v3/api-docs
+server:
+  port: 9091

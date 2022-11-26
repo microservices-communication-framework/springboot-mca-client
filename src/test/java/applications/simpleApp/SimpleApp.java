@@ -8,7 +8,6 @@ import org.thepavel.icomponent.InterfaceComponentScan;
 
 @EnableMcaClient
 @SpringBootApplication
-@InterfaceComponentScan
 public class SimpleApp {
 
     public static void main(String[] args) {

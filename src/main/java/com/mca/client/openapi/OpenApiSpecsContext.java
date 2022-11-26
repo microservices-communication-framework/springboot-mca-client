@@ -1,12 +1,10 @@
 package com.mca.client.openapi;
 
 import io.swagger.oas.models.OpenAPI;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
 public class OpenApiSpecsContext {
 
     private Map<String, OpenAPI> specsMap = new HashMap<>();

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-@ConditionalOnProperty("mca.spring.security.oauth2.client")
+@ConditionalOnProperty("mca.spring.security.oauth2.client.enabled")
 public class OAuthClientConfiguration {
 
     @Autowired
@@ -89,6 +89,4 @@ public class OAuthClientConfiguration {
         }
         return new InMemoryReactiveClientRegistrationRepository(clientRegistrations);
     }
-
-
 }
