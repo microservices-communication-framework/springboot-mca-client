@@ -19,6 +19,11 @@ The API consumer service should include the following dependency:
 </dependency>
 ```
 
+### Gradle
+```groovy
+    implementation 'io.github.ahmedriahi:springboot-mca-client:0.0.4'
+```
+
 ## Application configuration
 
 Add both `@EnableMcaClient` and `@InterfaceComponentScan` to your main springboot application class
